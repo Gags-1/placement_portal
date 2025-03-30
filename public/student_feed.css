@@ -1,0 +1,245 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%; /* Ensure it takes full width */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    position: fixed;  /* Fix sidebar position */
+    height: 100vh; /* Make sidebar cover full height */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Enable scrolling inside the sidebar if needed */
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-icon {
+    font-size: 50px;
+    color: white;
+}
+
+#sidebarStudentName {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 5px;
+    align-items: right;
+}
+
+/* Sidebar Navigation */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.sidebar-item i {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.sidebar-item.active {
+    background: rgba(255,255,255,0.2);
+    border-left: 4px solid white;
+}
+
+.logout-item {
+    margin-top: auto;
+    padding: 15px;
+    color: red;
+    font-weight: bold;
+}
+
+.logout-item:hover {
+    background: rgba(255, 0, 0, 0.3);
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    left: 250px; /* Align with main content */
+    right: 0;
+    background: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000; /* Keep it above other elements */
+    
+    display: flex;
+    justify-content: space-between; /* Push items to opposite sides */
+    align-items: center; /* Align items in the center */
+}
+/* Main Content - Adjust for Sidebar */
+.main-content {
+    margin-left: 250px; /* Same width as the sidebar */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; /* Enable scrolling for content */
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #f1f2f6;
+    border-radius: 20px;
+    padding: 8px 15px;
+    width: 300px;
+}
+
+.search-icon {
+    color: #a4b0be;
+    margin-right: 10px;
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Add spacing between elements */
+}
+
+
+/* Notification icon */
+.notifications {
+    position: relative;
+    cursor: pointer;
+}
+
+
+.notifications i {
+    font-size: 20px;
+}
+
+/* Notification badge */
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+}
+/* Job Listings */
+.job-list-container {
+    flex: 1;
+    width: 100%;
+    max-width: 800px; /* Adjust max width for better readability */
+    margin: 0 auto; /* Center the job list */
+}
+
+/* Change display to flex with column direction to stack jobs vertically */
+.job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds spacing between each job item */
+}
+
+/* Ensure job items take full width */
+.job-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+    width: 100%; /* Ensures job items stretch fully */
+}
+
+.job-item:hover {
+    transform: translateY(-5px);
+}
+
+.job-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.job-item-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.job-item-date {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+
+.job-item-description {
+    color: #34495e;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Apply Button */
+.apply-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.apply-btn:hover {
+    background-color: #2980b9;
+}
+
+.apply-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}

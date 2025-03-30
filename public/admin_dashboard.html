@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Panel</h2>
+            <ul>
+                <li class="active" onclick="showSection('dashboard')">Dashboard</li>
+                <li onclick="showSection('listJobs')">List Jobs</li>
+                <li onclick="showSection('settings')">Student Data</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="top-bar">
+                <h2>Welcome, Admin</h2>
+                <button id="logoutBtn">Logout</button>
+            </div>
+
+            <!-- Dashboard Overview -->
+            <div id="dashboard" class="form-section">
+                <h3>Dashboard Overview</h3>
+                <p>Welcome to the Admin Panel. Below are the current job listings:</p>
+                <div id="dashboardJobs" class="job-list">
+                    <h3>Available Jobs</h3>
+                </div>
+            </div>
+
+            <!-- List Jobs Section -->
+            <div id="listJobs" class="form-section hidden">
+                <h3>List Jobs</h3>
+                <form id="jobForm">
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" id="jobTitle" placeholder="Enter job title" required>
+
+                    <label for="jobDescription">Job Description:</label>
+                    <textarea id="jobDescription" placeholder="Enter job description" required></textarea>
+
+                    <label for="registrationLink">Registration Link:</label>
+                    <input type="url" id="registrationLink" placeholder="Enter registration link" required>
+
+                    <button type="submit">Create Job</button>
+                </form>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="form-section hidden">
+                
+                <!-- Student Details Section -->
+                <div class="student-details">
+                    <h3>Student Details</h3>
+
+                    <!-- Download CSV Button -->
+                    <button id="downloadCsvBtn" class="btn btn-primary">Download Student Data (CSV)</button>
+
+                    <!-- Raw JSON Display -->
+                    <pre id="studentData" class="json-display">Fetching data...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin_dashboard.js"></script>
+</body>
+</html>
