@@ -7,6 +7,26 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    async function fetchStats() {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/admin/stats", {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) throw new Error("Failed to fetch stats");
+
+            const stats = await response.json();
+            document.getElementById("totalJobs").textContent = stats.total_jobs;
+            document.getElementById("totalStudents").textContent = stats.total_students;
+        } catch (error) {
+            console.error("Error fetching stats:", error);
+            document.getElementById("totalJobs").textContent = "Error";
+            document.getElementById("totalStudents").textContent = "Error";
+        }
+    }
+
+    fetchStats();
+
     document.getElementById("logoutBtn").addEventListener("click", function () {
         localStorage.removeItem("admin_token");
         window.location.href = "admin_login.html";
@@ -161,8 +181,13 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        const tableContainer = document.createElement("div");
+        tableContainer.classList.add("table-container");
+        tableContainer.style.cssText = "overflow-x: auto; max-height: 80vh; position: relative; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 20px 0;";
+
         const table = document.createElement("table");
         table.classList.add("student-table");
+        table.style.cssText = "width: 100%; border-collapse: collapse; white-space: nowrap;";
 
         const headers = [
             "Registration No", "Name", "Branch", "DOB", "Category", "Gender",
@@ -178,10 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
 
         const thead = document.createElement("thead");
+        thead.style.cssText = "position: sticky; top: 0; background: #f8f9fa; box-shadow: 0 2px 2px rgba(0,0,0,0.1);";
+        
         const headerRow = document.createElement("tr");
         headers.forEach(headerText => {
             const th = document.createElement("th");
             th.textContent = headerText;
+            th.style.cssText = "padding: 12px 15px; text-align: left; border: 1px solid #ddd; font-weight: bold;";
             headerRow.appendChild(th);
         });
         thead.appendChild(headerRow);
@@ -190,11 +218,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const tbody = document.createElement("tbody");
         students.forEach(student => {
             const row = document.createElement("tr");
+            row.style.cssText = "transition: background-color 0.3s ease;";
+            row.addEventListener('mouseover', () => row.style.backgroundColor = '#f5f5f5');
+            row.addEventListener('mouseout', () => row.style.backgroundColor = 'transparent');
 
             headers.forEach(header => {
                 const fieldName = header.toLowerCase().replace(/\s+/g, "_");
                 const td = document.createElement("td");
                 td.textContent = student[fieldName] || "N/A";
+                td.style.cssText = "padding: 12px 15px; border: 1px solid #ddd;";
                 row.appendChild(td);
             });
 
@@ -202,7 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         table.appendChild(tbody);
-        studentDataElement.appendChild(table);
+        tableContainer.appendChild(table);
+        studentDataElement.appendChild(tableContainer);
     }
 
     document.getElementById("downloadCsvBtn").addEventListener("click", async function () {

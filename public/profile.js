@@ -288,12 +288,9 @@ document.getElementById("tg-form").addEventListener("submit", async function (ev
 document.getElementById("placement-interest-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const regNumber = document.getElementById("reg-number").innerText.trim(); // Ensure regNumber is correctly fetched
-    const token = localStorage.getItem("token"); // Ensure token is stored properly
-
     const updatedPlacementData = {
         interested_in_placement: document.getElementById("interested_in_placement").value,
-        placement_declaration: document.querySelector('input[name="placement_declaration"]:checked')?.value || "",
+        placement_declaration: document.querySelector('input[name="placement_declaration"]:checked')?.value === "true",
         reason_not_interested: document.getElementById("reason_not_interested").value.trim()
     };
 
@@ -307,16 +304,15 @@ document.getElementById("placement-interest-form").addEventListener("submit", as
             body: JSON.stringify(updatedPlacementData)
         });
 
-        const responseData = await response.json(); // Parse JSON response
-
         if (response.ok) {
             alert("Placement Interest details updated successfully!");
+            fetchStudent(); // Refresh data
         } else {
-            console.error("Server Error:", responseData);
+            const responseData = await response.json();
             alert(`Failed to update Placement Interest details: ${responseData.detail || "Unknown error"}`);
         }
     } catch (error) {
-        console.error("Fetch Error:", error);
+        console.error("Error updating placement details:", error);
         alert("An error occurred while updating Placement Interest details.");
     }
 });

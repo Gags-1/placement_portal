@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
         profileNav.addEventListener('click', redirectToProfile);
     }
 
+    // Initialize Notification Manager
+    window.notificationManager = new NotificationManager();
+
     // Fetch Initial Data
     fetchStudentDetails();
     fetchJobListings();
@@ -17,6 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (jobSearchInput) {
         jobSearchInput.addEventListener('input', filterJobs);
     }
+
+    // Set up periodic job check
+    setInterval(fetchJobListings, 60000); // Check for new jobs every minute
 });
 
 // Redirect to Profile Page
@@ -88,6 +94,11 @@ function fetchJobListings() {
         return response.json();
     })
     .then(jobs => {
+        // Check for new jobs and update notifications
+        if (window.notificationManager) {
+            window.notificationManager.checkNewJobs(jobs);
+        }
+
         // Clear previous job listings
         jobList.innerHTML = "";
 

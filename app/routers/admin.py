@@ -77,6 +77,12 @@ def get_jobs(db: Session = Depends(get_db)):
     jobs = db.query(models.Job).all()
     return jobs
 
+@router.get("/stats")
+def get_stats(db: Session = Depends(get_db)):
+    total_jobs = db.query(models.Job).count()
+    total_students = db.query(models.Student).count()
+    return {"total_jobs": total_jobs, "total_students": total_students}
+
 @router.delete("/jobs/{job_id}", status_code=200)
 def delete_job(job_id: int, db: Session = Depends(get_db)):
     job = db.query(models.Job).filter(models.Job.id == job_id).first()
