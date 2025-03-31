@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from .routers import user, auth, admin_auth, admin
 from fastapi.middleware.cors import CORSMiddleware  
+from fastapi.staticfiles import StaticFiles
 app=FastAPI()
 
 
